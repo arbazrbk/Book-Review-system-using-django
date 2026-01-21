@@ -29,3 +29,7 @@ class BookUpdateView(BookListView):
 class BookDeleteView(redirectview):
     pattern_name = 'book:list'      
     
+    def get_redirect_url(self, *args, **kwargs):
+        pk = kwargs.get('pk')
+        messages.get(self.request, 'Book deleted successfully.')
+        return super().get_redirect_url(*args, **kwargs)
