@@ -48,14 +48,5 @@ class BookUpdateView(BookListView):
             messages.success(request, 'Book updated successfully.')
             return redirect('update',pk=pk)
         return render(request,'book/book_update.html',{'form':form})
-class BookDeleteView(RedirectView):
-    pattern_name = 'detail'      
-    
-    def get_redirect_url(self, *args, **kwargs):
-        pk = kwargs.get('pk')
-        book = Book.objects.get(pk=pk)
-        book.delete()
-        messages.success(self.request, 'Book deleted successfully.')
-        return super().get_redirect_url(*args, **kwargs)
-        
+
     
