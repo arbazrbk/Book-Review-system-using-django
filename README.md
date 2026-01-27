@@ -60,4 +60,4 @@ This project is licensed under the MIT License.
 
 ---
 
-**Made with Django, HTML, and CSS.**
+**Made with Django, HTML, and CSS.**r
