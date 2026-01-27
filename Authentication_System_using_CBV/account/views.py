@@ -11,10 +11,11 @@ from account.models import User
 from django.contrib import messages
 from django import forms 
 from django.shortcuts import redirect
+from account.mixins import MixinClass
 
 
 
-class loginView(View):
+class loginView(View,MixinClass):
     def get(self,request,*args,**kwargs):
         return render (request, 'account/login.html')
     
@@ -56,7 +57,7 @@ class loginView(View):
                 messages.error("you dont have the permission ")
                     
     
-class RegistrationView(View):
+class RegistrationView(View,MixinClass):
     def get(self,request):
         form = RegistrationForm()
         return render (request, 'account/register.html',{'form':form})
@@ -79,7 +80,7 @@ class RegistrationView(View):
        # activation_link = reverse("activate",kwarge = {'uid56':uid56,'token':token})
        # activation_url = f'(settings.SITE_DOAMIN)'{activation_link}
         
-class PasswordChangedView(PasswordChangeView):
+class PasswordChangedView(PasswordChangeView, MixinClass):
     template_name = 'customer/change_password.html'
     sucess_url = reverse_lazy('dashboard')
     
@@ -93,6 +94,6 @@ class PasswordChangedView(PasswordChangeView):
         messages.error (self.request,"there was an error updating your password")
         return super().not_valid(form)        
     
-class HomeView(View):
+class HomeView(View, MixinClass):
     def get(self,request,*args,**kwargs):
         return render (request, 'account/home.html')
